@@ -5,4 +5,9 @@
   <button class = "button"><%=link_to "log in", new_user_session_path%></button>
   <button class = "button"><%=link_to "sign up", new_user_registration_path%></button>
   <% end %>
+
+  <p id="notice"><%= flash[:notice] %></p>
+  <% @posts.each do |post| %>
+    <p><%= link_to post.title, user_post_path(post.user, post.id) %><p>
+  <% end %>
 </div>
