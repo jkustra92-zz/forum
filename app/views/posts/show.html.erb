@@ -1,11 +1,31 @@
 <div id = "show-container">
   <%=link_to "back to all posts", root_path, :class => "label" %>
   <br>
-  <p> the current user id is: <%= @currentUser %></p>
-  <p> the user who authored this post is: <%= @user.id %></p>
   <h2><%= @post.title %></h2>
   <p class = "caption"><%= @post.content %></p>
-<% if @user.id == @currentUser %>
-<%=link_to 'delete', user_post_path(@user, @post), :method => 'delete', :class => "delete-button"%>
+<% if user_signed_in? %>
+  <% if @user.id == current_user.id %>
+    <%=link_to 'delete', user_post_path(@user, @post), :method => 'delete', :class => "delete-button"%>
+  <% end %>
+<% end %>
+
+<h2>comments</h2>
+
+<% if @comments.class == Comment::ActiveRecord_Relation %>
+  <% @comments.each do |comment| %>
+  <p><%=comment.author%>: <%=comment.content%></p>
+  <button id = <%=comment.id%>><%=link_to 'Delete', product_review_path(:comment_id => comment.id, :post_id => @post.id), :method => 'delete'%></button>
+  <% end %>
+<% elsif @comments.class == Comment %>
+  <p><%=@comments.author%>: <%=@comments.content%></p>
+  <button id = "delete-button"><%=link_to 'delete', post_comment_path(:post_id => @post.id), :method => 'delete'%></button>
+<% else %>
+  <p> this post has no comments! </p>
+<% end %>
+</div>
+<% if user_signed_in? %>
+<p><%= link_to 'add a comment', new_post_comment_path(:post_id => @post.id)%></p>
+<% else %>
+<p>please log in to leave a comment</p>
 <% end %>
 </div>

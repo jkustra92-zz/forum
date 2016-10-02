@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!, only: [:show, :destroy, :new, :create]         #before the route, authenticate the user so ppl who aren't logged in can't access routes
+  # before_action :authenticate_user!, only: [:show, :destroy, :new, :create]         #before the route, authenticate the user so ppl who aren't logged in can't access routes
   before_action :set_user, only: [:new, :create, :show, :destroy]                   #setting the user before each of these routes to eliminate redundancy in my code
   before_action :set_post, only: [:show, :destroy]                                  #same as above, but only need it for show page and delete route
 
@@ -40,16 +40,14 @@ class PostsController < ApplicationController
     puts "i'm here!"
     print @post
     puts "========="
-    # @post.destroy                           #set the post in the set_post method and then get rid of it!! d e s t r o y.
-    # redirect_to @user
+    @post.destroy                           #set the post in the set_post method and then get rid of it!! d e s t r o y.
+    redirect_to @user
   end
 
   private 
   def set_user
     #use the params to find the user
     @user = User.find(params[:user_id])
-    #use devise to find the current user id
-    @currentUser = current_user.id     
   end
 
   def set_post
