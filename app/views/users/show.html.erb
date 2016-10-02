@@ -1,6 +1,8 @@
 <div id = "posts-container">
   <button class = "button"><%=link_to "add a new post", new_user_post_path(@user.id), :class => "addnewbutton"%></button>
+  <br>
+  <br>
   <% @posts.each do |post| %>
-    <p> hallo </p>
+    <%= link_to post.title, user_post_path(@user, post) %>
   <% end %>
 </div>

@@ -1,1 +1,11 @@
-show.html.erb
+<div id = "show-container">
+  <%=link_to "back to all posts", root_path, :class => "label" %>
+  <br>
+  <p> the current user id is: <%= @currentUser %></p>
+  <p> the user who authored this post is: <%= @user.id %></p>
+  <h2><%= @post.title %></h2>
+  <p class = "caption"><%= @post.content %></p>
+<% if @user.id == @currentUser %>
+<%=link_to 'delete', user_post_path(@user, @post), :method => 'delete', :class => "delete-button"%>
+<% end %>
+</div>
