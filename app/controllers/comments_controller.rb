@@ -3,6 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :new, :create, :destroy]
 
   def new
+    @user = User.find(params[:user_id])
     @comment = Comment.new
     puts "=========="
     puts params
@@ -10,14 +11,16 @@ class CommentsController < ApplicationController
   end
 
   def create
+ 
     puts "========="
-    puts params
+    puts params[:comment][:user_id]
     puts "========="
     puts "========="
     @comment = Comment.new(comment_params)
-    puts @review
+    puts @comment
     if @comment.save
-     redirect_to post_path(@post.id)
+     @user = User.find(params[:comment][:user_id])
+     redirect_to user_post_path(@user.id, @post.id)
     else
       render :action => :new
     end
@@ -27,9 +30,10 @@ class CommentsController < ApplicationController
     puts "==========="
     puts params
     puts "==========="
-    @comment = Comment.find(params[:comment_id])
+    @comment = Comment.find(params[:id])
     @comment.destroy
-    redirect_to post_path(@post.id)
+    @user = User.find(params[:user_id])
+    redirect_to user_post_path(@user.id, @post.id)
   end
 
   private
@@ -37,7 +41,7 @@ class CommentsController < ApplicationController
       puts "====="
       puts params
       puts "====="
-      @product = Post.find(params[:post_id])        
+      @post = Post.find(params[:post_id])        
     end
 
     def comment_params                                              

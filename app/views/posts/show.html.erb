@@ -14,17 +14,18 @@
 <% if @comments.class == Comment::ActiveRecord_Relation %>
   <% @comments.each do |comment| %>
   <p><%=comment.author%>: <%=comment.content%></p>
-  <button id = <%=comment.id%>><%=link_to 'Delete', product_review_path(:comment_id => comment.id, :post_id => @post.id), :method => 'delete'%></button>
+  <button id = <%=comment.id%>><%=link_to 'Delete', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete'%></button>
   <% end %>
 <% elsif @comments.class == Comment %>
   <p><%=@comments.author%>: <%=@comments.content%></p>
-  <button id = "delete-button"><%=link_to 'delete', post_comment_path(:post_id => @post.id), :method => 'delete'%></button>
+  <button id = "delete-button"><%=link_to 'delete', post_comment_path(:id => @comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete'%>
+  </button>
 <% else %>
   <p> this post has no comments! </p>
 <% end %>
 </div>
 <% if user_signed_in? %>
-<p><%= link_to 'add a comment', new_post_comment_path(:post_id => @post.id)%></p>
+<p><%= link_to 'add a comment', new_post_comment_path(:post_id => @post.id, :user_id => @user.id)%></p>
 <% else %>
 <p>please log in to leave a comment</p>
 <% end %>

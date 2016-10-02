@@ -7,7 +7,7 @@ class PostsController < ApplicationController
     puts "=========="
     puts @post.id
     puts "=========="
-    @comments = Comment.where("id": @post.id)
+    @comments = Comment.where("post_id": @post.id)
     puts "==========="
     puts @comments
     puts @comments.class

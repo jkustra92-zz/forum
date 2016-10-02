@@ -1,0 +1,8 @@
+<%= form_for [@post, @comment] do |form| %>
+  author: <%= current_user.email %></br>
+  content: <%= form.text_field :content %></br>
+  <%= form.hidden_field :post_id, value: @post.id %>
+  <%= form.hidden_field :author, value: current_user.email %>
+  <%= form.hidden_field :user_id, value: @user.id %>
+  <%= form.submit %>
+<% end %> 
