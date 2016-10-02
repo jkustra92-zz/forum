@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Forum</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<% if user_signed_in? %>
+  <div id = "logged-in-bar">
+    <ul>
+      <li><a href="/users/<%=current_user.id%>"><strong class = "useremail"><%= current_user.email %>&nbsp;|</strong>&nbsp;</a></li>
+      <li><%= link_to 'edit profile', edit_user_registration_path, :class => 'navbar-link' %>&nbsp;<strong>|</strong>&nbsp;</li>
+       <li><%= link_to "logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %></li>
+    </ul>
+  </div>
+<% end %>
+</p>
+<%= yield %>
+
+</body>
+</html>

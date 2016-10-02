@@ -1,0 +1,14 @@
+<div id = "form-container">
+  <%=link_to "back to home", user_path(@user.id), :class => "label"%>
+  <br>
+  <br>
+  <%= form_for [@user, @post] do |form| %>
+    <label class = "label" for="post_caption">title</label>
+    <br>
+    <%= form.text_field :title, :class => "input" %><br><br>
+    <label class = "label" for="post_caption">content</label>
+    <br>
+    <%= text_area_tag :comment %> <br><br>
+    <%= form.submit :class => "button" %>
+  <% end %>
+</div>
