@@ -5,10 +5,10 @@
   <%= form_for [@user, @post] do |form| %>
     <label class = "label" for="post_title">title</label>
     <br>
-    <%= form.text_field :title, :class => "input" %><br><br>
+    <%= form.text_field :title, :class => "input title-input" %><br><br>
     <label class = "label" for="post_content">content</label>
     <br>
-    <%= form.text_area(:content, cols: 40, rows: 20) %> <br><br>
+    <%= form.text_area :content, :class => "content-input" %> <br><br>
     <%= form.submit :class => "button" %>
   <% end %>
 </div>

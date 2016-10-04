@@ -5,28 +5,41 @@
   <p class = "caption"><%= @post.content %></p>
 <% if user_signed_in? %>
   <% if @user.id == current_user.id %>
-    <%=link_to 'delete', user_post_path(@user, @post), :method => 'delete', :class => "delete-button"%>
+    <%=link_to '-', user_post_path(@user, @post), :method => 'delete', :class => "delete-button"%>
   <% end %>
 <% end %>
 
-<h2>comments</h2>
+<h3 class = "comments-title">comments</h3>
 
 <% if @comments.class == Comment::ActiveRecord_Relation %>
   <% @comments.each do |comment| %>
-  <p><%=comment.author%>: <%=comment.content%></p>
-  <button id = <%=comment.id%>><%=link_to 'Delete', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete'%></button>
+  <div>
+  <% if user_signed_in? %>
+    <% if comment.author === current_user.email%>
+      <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+    <% end %>
   <% end %>
+  <p class ="comment-content"><strong><%=comment.author%>:</strong> <%=comment.content%></p>
+  </div>
+<% end %>
 <% elsif @comments.class == Comment %>
-  <p><%=@comments.author%>: <%=@comments.content%></p>
-  <button id = "delete-button"><%=link_to 'delete', post_comment_path(:id => @comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete'%>
-  </button>
+  <div id = "comments">
+  <% if user_signed_in? %>
+    <% if comment.author === current_user.email%>
+      <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+    <% end %>
+  <% end %>
+  <p class ="comment-content"><%=comment.author%>: <%=comment.content%></p>
+  </div>
 <% else %>
   <p> this post has no comments! </p>
 <% end %>
-</div>
+
 <% if user_signed_in? %>
-<p><%= link_to 'add a comment', new_post_comment_path(:post_id => @post.id, :user_id => @user.id)%></p>
+<p class = "message"><%= link_to 'add a comment', new_post_comment_path(:post_id => @post.id, :user_id => @user.id)%></p>
 <% else %>
-<p>please log in to leave a comment</p>
+<p class = "message">please log in to leave a comment</p>
 <% end %>
+</div>
+
 </div>

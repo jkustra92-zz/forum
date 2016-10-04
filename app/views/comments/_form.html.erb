@@ -1,8 +1,15 @@
-<%= form_for [@post, @comment] do |form| %>
-  author: <%= current_user.email %></br>
-  content: <%= form.text_field :content %></br>
+<div id = "form-container">
+  <%=link_to "back to home", user_path(@user.id), :class => "label"%>
+  <br>
+  <br>
+
+  <%= form_for [@post, @comment] do |form| %>
+  <p class="comment-author">author: <%= current_user.email %></p></br>
+  <p class="comment-content">content:</p>
+  <%= form.text_field :content, :class => "input" %></br>
   <%= form.hidden_field :post_id, value: @post.id %>
   <%= form.hidden_field :author, value: current_user.email %>
   <%= form.hidden_field :user_id, value: @user.id %>
-  <%= form.submit %>
+  <%= form.submit :class => "button comment-button" %>
 <% end %> 
+</div>

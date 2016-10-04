@@ -1,8 +1,14 @@
 <div id = "posts-container">
-  <button class = "button"><%=link_to "add a new post", new_user_post_path(@user.id), :class => "addnewbutton"%></button>
+  <button class = "button"><%=link_to "add post", new_user_post_path(@user.id), :class => "addnewbutton"%></button>
   <br>
   <br>
+  <h2 class = "user-posts"> MY POSTS </h2>
+  <div class = "posts-container">
   <% @posts.each do |post| %>
-    <%= link_to post.title, user_post_path(@user, post) %>
+    <div class = "single-post">
+    <h1 class ="post-title"><%=post.title%></h1>
+    <p><%= link_to 'read more', user_post_path(post.user, post.id), :class => 'read-more' %></p>
+    </div>
   <% end %>
+  </div>
 </div>

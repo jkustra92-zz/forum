@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     puts "==========="
     puts @posts
     puts "==========="
-
+    @user = current_user
     @posts.each do |post|
       puts post.user
     end
