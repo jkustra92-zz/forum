@@ -149,6 +149,10 @@ h2 {
   text-align: center;
 }
 
+#form-container {
+  text-align: center;
+}
+
 .check_box {
   width: 20px;
   height: 20px;
@@ -173,8 +177,6 @@ h2 {
 #posts-container {
   text-align: center;
 }
-
-
 
 /*SEEING A POST*/
 

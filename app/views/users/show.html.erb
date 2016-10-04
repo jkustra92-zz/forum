@@ -1,4 +1,6 @@
 <div id = "posts-container">
+  <%=link_to "back to all posts", root_path, :class => "label" %>
+  <br>
   <button class = "button"><%=link_to "add post", new_user_post_path(@user.id), :class => "addnewbutton"%></button>
   <br>
   <br>
