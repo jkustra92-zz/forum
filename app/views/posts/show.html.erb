@@ -2,6 +2,7 @@
   <%=link_to "back to all posts", root_path, :class => "label" %>
   <br>
   <h2 class ="show-post-title"><%= @post.title %></h2>
+  <p class = "caption"> by: <%= @user.email %></p>
   <p class = "caption"><%= @post.content %></p>
 <% if user_signed_in? %>
   <% if @user.id == current_user.id %>
