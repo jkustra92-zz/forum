@@ -174,30 +174,7 @@ h2 {
   text-align: center;
 }
 
-.post-images {
-  display: block;
-  margin-bottom: 1em;
-}
-/*ADDING A NEW IMAGE*/
 
-input[type="file"] {
-  width: 0.1px;
-  height: 0.1px;
-  opacity: 0;
-  overflow: hidden;
-  position: absolute;
-  z-index: -1;
-}
-
-.file-button {
-  border: 5px solid #467b8d;
-  cursor: pointer;
-  border-radius: 10px;
-}
-
-#form-container {
-  text-align: center;
-}
 
 /*SEEING A POST*/
 
@@ -205,17 +182,15 @@ input[type="file"] {
   text-align: center;
 }
 
+.show-post-title {
+  padding: 25px;
+}
+
 .caption {
   font-family: 'Lato', sans-serif;
   color: #161616;
   font-size: 20px;
   margin-bottom: 10em;
-}
-
-.post-img {
-  margin-top: 2em;
-  border: 5px solid #467b8d;
-  border-radius: 10px;
 }
 
 .delete-button {

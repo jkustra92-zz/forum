@@ -1,7 +1,7 @@
 <div id = "show-container">
   <%=link_to "back to all posts", root_path, :class => "label" %>
   <br>
-  <h2><%= @post.title %></h2>
+  <h2 class ="show-post-title"><%= @post.title %></h2>
   <p class = "caption"><%= @post.content %></p>
 <% if user_signed_in? %>
   <% if @user.id == current_user.id %>
@@ -14,22 +14,22 @@
 <% if @comments.class == Comment::ActiveRecord_Relation %>
   <% @comments.each do |comment| %>
   <div>
-  <% if user_signed_in? %>
-    <% if comment.author === current_user.email%>
-      <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+    <% if user_signed_in? %>
+      <% if comment.author === current_user.email%>
+        <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+      <% end %>
     <% end %>
-  <% end %>
-  <p class ="comment-content"><strong><%=comment.author%>:</strong> <%=comment.content%></p>
+    <p class ="comment-content"><strong><%=comment.author%>:</strong> <%=comment.content%></p>
   </div>
 <% end %>
 <% elsif @comments.class == Comment %>
   <div id = "comments">
-  <% if user_signed_in? %>
-    <% if comment.author === current_user.email%>
-      <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+    <% if user_signed_in? %>
+      <% if comment.author === current_user.email%>
+        <%=link_to 'x', post_comment_path(:id => comment.id, :post_id => @post.id, :user_id => @user.id), :method => 'delete', :class => "delete-button comment-delete"%>
+      <% end %>
     <% end %>
-  <% end %>
-  <p class ="comment-content"><%=comment.author%>: <%=comment.content%></p>
+    <p class ="comment-content"><%=comment.author%>: <%=comment.content%></p>
   </div>
 <% else %>
   <p> this post has no comments! </p>

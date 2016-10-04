@@ -1,46 +1,53 @@
 class PostsController < ApplicationController
-  # before_action :authenticate_user!, only: [:show, :destroy, :new, :create]         #before the route, authenticate the user so ppl who aren't logged in can't access routes
-  before_action :set_user, only: [:new, :create, :show, :destroy]                   #setting the user before each of these routes to eliminate redundancy in my code
-  before_action :set_post, only: [:show, :destroy]                                  #same as above, but only need it for show page and delete route
+  #setting the user before each of these routes to eliminate redundancy in my code
+  before_action :set_user, only: [:new, :create, :show, :destroy]   
+  #same as above, but only need it for show page and delete route                
+  before_action :set_post, only: [:show, :destroy]                                  
 
   def show
-    puts "=========="
-    puts @post.id
-    puts "=========="
+    #i 'puts' a LOT of things. always be testing and making sure you know where your data changes.
+    # puts "=========="
+    # puts @post.id
+    # puts "=========="
     @comments = Comment.where("post_id": @post.id)
-    puts "==========="
-    puts @comments
-    puts @comments.class
-    puts "============"
+    # puts "==========="
+    # puts @comments
+    # puts @comments.class
+    # puts "============"
   end
 
   def new
-    puts "====="
-    p params
-    puts "======"
-    @post = Post.new          #make a new instance of the Post class, which the user will later fill out in the super intelligent form that knows things
+    # puts "====="
+    # p params
+    # puts "======"
+    #create a new instance of the Post class, which the user will populate in the form.
+    @post = Post.new          
   end
 
   def create 
-    puts "========"
-    puts post_params
-    puts "========"
-    @post = Post.new(post_params)         #making a new instance of the Post class, using the post-params from the form (there's a method for that in the private methods)
+    # puts "========"
+    # puts post_params
+    # puts "========"
+    #making a new instance of the Post class, using the post-params from the form (there's a method for that in the private methods)
+    @post = Post.new(post_params)         
      if @post.save
-      @user.posts << @post                #push the post into the user which is set
+      #push the post into the user which is set
+      @user.posts << @post                
       redirect_to @user
     else
-      flash[:error] = "something went wrong :("                                   #so if there's an issue with the form and it can't submit, this error message will post. 
+      #so if there's an issue with the form and it can't submit, this error message will post. 
+      flash[:error] = "something went wrong :("                                   
       render :action => :new
     end
   end
 
   def destroy
-    puts "========="
-    puts "i'm here!"
-    print @post
-    puts "========="
-    @post.destroy                           #set the post in the set_post method and then get rid of it!! d e s t r o y.
+    # puts "========="
+    # puts "i'm here!"
+    # print @post
+    # puts "========="
+    #set the post in the set_post method and then get rid of it!! d e s t r o y.
+    @post.destroy                           
     redirect_to @user
   end
 
@@ -51,10 +58,12 @@ class PostsController < ApplicationController
   end
 
   def set_post
-    @post = Post.find(params[:id])           #same as above, but this time with post
+    #same as above, but this time with post
+    @post = Post.find(params[:id])          
   end
 
-  def post_params  
-    params.require(:post).permit(:title, :content)     #get the params out of the form (permit only the image and caption, so other info can't be passed into the form)
+  def post_params 
+    #get the params out of the form (permit only the image and caption, so other info can't be passed into the form) 
+    params.require(:post).permit(:title, :content) 
   end  
 end

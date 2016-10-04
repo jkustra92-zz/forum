@@ -4,11 +4,11 @@
   <br>
   <h2 class = "user-posts"> MY POSTS </h2>
   <div class = "posts-container">
-  <% @posts.each do |post| %>
-    <div class = "single-post">
-    <h1 class ="post-title"><%=post.title%></h1>
-    <p><%= link_to 'read more', user_post_path(post.user, post.id), :class => 'read-more' %></p>
-    </div>
-  <% end %>
+    <% @posts.each do |post| %>
+      <div class = "single-post">
+        <h1 class ="post-title"><%=post.title%></h1>
+        <p><%= link_to 'read more', user_post_path(post.user, post.id), :class => 'read-more' %></p>
+      </div>
+    <% end %>
   </div>
 </div>
