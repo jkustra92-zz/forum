@@ -192,7 +192,9 @@ h2 {
   font-family: 'Lato', sans-serif;
   color: #161616;
   font-size: 20px;
-  margin-bottom: 10em;
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 25px;
 }
 
 .delete-button {
